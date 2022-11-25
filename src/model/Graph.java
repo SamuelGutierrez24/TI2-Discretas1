@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 public class Graph<T> {
 
     ArrayList<Vertex<T>> vertices;
-    private HashMap<Integer, Vertex<T>>vertexes;
+    protected HashMap<Integer, Vertex<T>>vertexes;
     //ArrayList<ArrayList<Edge>> aristasA;
 
     private int time = 0;
@@ -184,18 +184,32 @@ public class Graph<T> {
     }
 
     public void addArista(int keyFrom, int keyTo, int peso) throws Exception{
+    	
         if(vertexes.get(keyFrom) != null && vertexes.get(keyTo) != null){
 
             Edge arista = new Edge(vertexes.get(keyFrom), vertexes.get(keyTo), peso);
 
-            vertexes.get(keyFrom).aristas.add(arista);
-
+            vertexes.get(keyFrom).addEdge(arista);
+            	
             añadirAdyacentes(keyTo, keyFrom);
+            
+
+            //añadirAdyacentes(keyTo, keyFrom);
         }else {
             throw new VertexNotFoundException("Invalid vertex input");
         }
 
 
+    }
+    
+    public void initialize() {
+    	
+    	for(Map.Entry<Integer, Vertex<T>> c : vertexes.entrySet()){
+            
+             c.getValue().initialize();  
+            
+        }
+    	
     }
 
 
@@ -277,13 +291,16 @@ public class Graph<T> {
                 verte=verte.getPadre();
             }
         }
+        
+        Collections.reverse(solution);
 
         String out = "{ ";
 
         boolean flag2 = true;
 
         for (int i = 0; i<solution.size()&&flag2;i++){
-            if (solution.get(i).getKey() == source){
+        	
+            if (solution.get(i).getKey() == to){
                 out += ""+ solution.get(i).getValue();
                 flag2 = false;
             }
@@ -299,7 +316,7 @@ public class Graph<T> {
             return "You can not visit that boss starting in your actual boss (vertex) ";
         }
 
-        return out + value;
+        return out + " " + value;
 
     }
 

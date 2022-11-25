@@ -22,9 +22,20 @@ public class Vertex<T>  {
         aristas = new ArrayList<>();
 
     }
+    
+    public void initialize() {
+    	
+    	this.aristas = new ArrayList<>();
+    	this.adyacentes = new ArrayList<>();
+    	
+    }
 
     public void addAdj(Vertex<T> toAdd){
         adyacentes.add(toAdd);
+    }
+    
+    public void addEdge(Edge<T> x){
+        aristas.add(x);
     }
 
     public int getColor() {

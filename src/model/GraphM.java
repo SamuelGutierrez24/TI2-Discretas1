@@ -149,16 +149,18 @@ public class GraphM<T> {
             }
 
         }
+        
+        Collections.reverse(solution);
 
         String out = "{ ";
         boolean flag = true;
         for (int i = 0; i<solution.size()&&flag;i++){
-            if (solution.get(i).getKey() == v ){
-                out+= ""+ solution.get(i).getKey();
+            if (solution.get(i).getKey() == to){
+                out+= ""+ solution.get(i).getValue();
                 flag = false;
             }
             else {
-                out+= solution.get(i).getKey() + ", ";
+                out+= solution.get(i).getValue() + ", ";
             }
         }
         out += "}";
@@ -168,7 +170,7 @@ public class GraphM<T> {
             return "You can not visit that boss starting in your actual boss (vertex) ";
         }
 
-        return out + value;
+        return out + " " + value;
 
     }
 
