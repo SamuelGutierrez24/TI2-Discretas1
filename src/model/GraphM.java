@@ -82,10 +82,10 @@ public class GraphM<T> {
 
     }
 
-    public String dijkstra(int v){
+    public String dijkstraBase(int v,int to){
         ArrayList<Vertex<T>> solution = new ArrayList<>();
         Vertex<T> source = vertexes.get(v);
-        source.setDistance(0);
+        source.setDistance(v);
 
         ArrayList<Vertex<T>> Q = new ArrayList<>();
         Q.add(source);
@@ -137,9 +137,9 @@ public class GraphM<T> {
         }
 
         boolean flag2 = true;
-        Vertex<T> verte = vertexes.get(3);
+        Vertex<T> verte = vertexes.get(to);
         solution.add(verte);
-        for(int i=0;i<50&&flag2;i++){
+        for(int i=0;i<to&&flag2;i++){
             if(verte.getPadre() == vertexes.get(v)){
                 solution.add(verte.getPadre());
                 flag2 = false;
@@ -153,7 +153,7 @@ public class GraphM<T> {
         String out = "{ ";
         boolean flag = true;
         for (int i = 0; i<solution.size()&&flag;i++){
-            if (solution.get(i).getKey() == 1 || solution.get(i).getKey() == 51){
+            if (solution.get(i).getKey() == to ){
                 out+= ""+ solution.get(i).getKey();
                 flag = false;
             }
@@ -163,11 +163,84 @@ public class GraphM<T> {
         }
         out += "}";
 
-        int value = vertexes.get(3).getDistance();
+        int value = vertexes.get(to).getDistance();
+        if(value == Integer.MAX_VALUE){
+            return "You can not visit that boss starting in your actual boss (vertex) ";
+        }
 
         return out + value;
 
     }
+
+    public int dijkstraNumD(int v,int to){
+        ArrayList<Vertex<T>> solution = new ArrayList<>();
+        Vertex<T> source = vertexes.get(v);
+        source.setDistance(v);
+
+        ArrayList<Vertex<T>> Q = new ArrayList<>();
+        Q.add(source);
+
+        for(Map.Entry<Integer,Vertex<T>> c : vertexes.entrySet()){
+            if(!c.getValue().equals(source)){
+                c.getValue().setDistance(Integer.MAX_VALUE);
+                Q.add(c.getValue());
+            }
+        }
+
+        Q.sort(new Comparator<Vertex<T>>() {
+            @Override
+            public int compare(Vertex<T> o1, Vertex<T> o2) {
+                return o1.getDistance()-o2.getDistance();
+            }
+        });
+
+        while (!Q.isEmpty()){
+
+            Vertex<T> u = Q.remove(0);
+
+
+
+            for (int i = 0; i<50;i++){
+                if(matriz[u.getKey()][i]!=null){
+                    int minus = Integer.MAX_VALUE;
+                    for (int j = 0; j<matriz[u.getKey()][i].size();j++){
+
+                        int alt = u.getDistance() + matriz[u.getKey()][i].get(j).getWeight();
+                        if(minus>alt){
+                            minus = alt;
+                        }
+                        if(minus<vertexes.get(i).getDistance()){
+                            vertexes.get(i).setDistance(minus);
+                            vertexes.get(i).setPadre(u);
+                            Q.sort(new Comparator<Vertex<T>>() {
+                                @Override
+                                public int compare(Vertex<T> o1, Vertex<T> o2) {
+                                    return o1.getDistance()-o2.getDistance();
+                                }
+                            });
+
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+        int value = vertexes.get(to).getDistance();
+
+        return value;
+
+    }
+
+
+
+
+
+
+
+
+
 
 
     public int getHashSize(){
@@ -190,5 +263,22 @@ public class GraphM<T> {
         }
         return count;
     }
+
+    public boolean prove(){
+        if(vertexes.get(3).getColor()!= white || vertexes.get(50).getColor()!= white){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+
+
+
+
+
+
+
+    
 }
 

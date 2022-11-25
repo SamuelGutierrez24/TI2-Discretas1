@@ -31,6 +31,7 @@ public class Main {
                 "(3) Prove that you can finish the game");
 
         int option = sc.nextInt();
+        sc.nextLine();
         return option;
     }
 
@@ -39,6 +40,7 @@ public class Main {
                 "(1) Adjacency list \n" +
                 "(2) Adjacency matrix");
         int option = sc.nextInt();
+        sc.nextLine();
         return option;
     }
 
@@ -49,17 +51,61 @@ public class Main {
                 System.out.println("no se");
                 break;
             case 2:
-                control.bosses(graph);
+                dijks(graph);
                 break;
+            case 3:
+            System.out.println("Input the key of the boss you are:");
+            int boss =  sc.nextInt();
+            sc.nextLine();
+            System.out.println(control.proveFinish(graph,boss));
             default:
                 System.out.println("Invalid input");
 
         }
     }
 
-    public void prueba(){
-        System.out.println(control.bosses(0));
+    public void dijks(int graph){
+
+        System.out.println("Select a case : \n" +
+        "(1) Default (From firts level boss to the less difficulty final) \n" +
+        "(2) Select one of the finals and show the order for less difficulty \n " +
+        "(3) Show the route with less difficulty of bosses from 2 vetex of your select\n");
+        int i = sc.nextInt();
+        sc.nextLine();
+
+        switch(i){
+            case 1:
+            System.out.println(control.bossesDe(graph));
+            break;
+            case 2:
+            System.out.println("Select a final : \n (1) Final 1 (vertex 50) \n (2) Final 2 (vertex 51) ");
+            int finall = sc.nextInt();
+            sc.nextLine();
+            if(finall == 1){
+                finall = 50;
+            }else{
+                finall = 51;
+            }
+            System.out.println(control.bossesF(graph, finall));
+            break;
+            case 3:
+            System.out.println("Remember your final boss key can not be upper than your start boss key");
+            System.out.println("Input the key of the boss from where you start your route:");
+            int start = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Input the key of the boss where you finish the route:");
+            int to = sc.nextInt();
+            sc.nextLine();
+            System.out.println(control.bossesST(graph, start, to));
+        }
+
+
     }
+
+    public void prueba(){
+        System.out.println(control.bosses());
+    }
+
 }
 
 

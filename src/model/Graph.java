@@ -200,7 +200,7 @@ public class Graph<T> {
 
 
 
-    public String Dijkstra(int source)  {
+    public String dijkstraBase(int source,int to)  {
 
         int[] dist2 = new int[vertexes.size()];
         
@@ -215,16 +215,6 @@ public class Graph<T> {
 
         vertexes.get(source).setDistance(0);
 
-        /*for (int i = 1; i < vertexes.size(); i++){
-
-            if (vertexes.get(i) != vertexes.get(source)) {
-
-                //dist2[i] = Integer.MAX_VALUE;
-                vertexes.get(i).setDistance(Integer.MAX_VALUE);
-
-            }
-
-        }*/
         temporalVertices.add(vertexes.get(source));
 
 		for(Map.Entry<Integer, Vertex<T>> c : vertexes.entrySet()){
@@ -278,8 +268,8 @@ public class Graph<T> {
         solution.add(verte);
         boolean flag = true;
 
-        for (int i = 0; i<50&&flag;i++){
-            if (verte.getPadre()==vertexes.get(0)){
+        for (int i = 0; i<to&&flag;i++){
+            if (verte.getPadre()==vertexes.get(source)){
                 solution.add(verte.getPadre());
                 flag = false;
             }else {
@@ -293,7 +283,7 @@ public class Graph<T> {
         boolean flag2 = true;
 
         for (int i = 0; i<solution.size()&&flag2;i++){
-            if (solution.get(i).getKey() == 1 || solution.get(i).getKey() == 51){
+            if (solution.get(i).getKey() == to){
                 out += ""+ solution.get(i).getValue();
                 flag2 = false;
             }
@@ -303,10 +293,95 @@ public class Graph<T> {
         }
         out += "}";
 
-        int value = vertexes.get(3).getDistance();
+        int value = vertexes.get(to).getDistance();
+
+        if(value==Integer.MAX_VALUE){
+            return "You can not visit that boss starting in your actual boss (vertex) ";
+        }
 
         return out + value;
 
+    }
+
+
+
+
+    public int dijkstraNumD(int source, int to)  {
+
+        int[] dist2 = new int[vertexes.size()];
+        
+        List<Vertex<T>> temporalVertices = new ArrayList<Vertex<T>>();
+
+        vertexes.get(source).aristas.sort(new Comparator<Edge>() {
+            @Override
+            public int compare(Edge o1, Edge o2) {
+                return o1.getWeight()-o2.getWeight();
+            }
+        });
+
+        vertexes.get(source).setDistance(0);
+
+        temporalVertices.add(vertexes.get(source));
+
+		for(Map.Entry<Integer, Vertex<T>> c : vertexes.entrySet()){
+            if(!c.getValue().equals(vertexes.get(source))){
+                c.getValue().setDistance(Integer.MAX_VALUE);
+                temporalVertices.add(c.getValue());
+            }
+        }
+        temporalVertices.sort(new Comparator<Vertex<T>>() {
+            @Override
+            public int compare(Vertex<T> o1, Vertex<T> o2) {
+                return o1.getDistance()-o2.getDistance();
+            }
+        });
+
+
+
+        while(!temporalVertices.isEmpty()) {
+
+
+                Vertex<T> u = temporalVertices.remove(0);
+
+                if(u != null) {
+
+                    for(int j = 0; j < u.aristas.size();j++) {
+
+                        int alt = u.getDistance()+u.aristas.get(j).getWeight();
+
+                        if(alt < u.aristas.get(j).getTo().getDistance()) {
+
+                            u.aristas.get(j).getTo().setDistance(alt);
+                            u.aristas.get(j).getTo().setPadre(u);
+
+                        }
+
+                    }
+
+                }
+
+                temporalVertices.sort(new Comparator<Vertex<T>>() {
+                    @Override
+                    public int compare(Vertex<T> o1, Vertex<T> o2) {
+                        return o1.getDistance()-o2.getDistance();
+                    }
+                });
+
+            }
+
+        int value = vertexes.get(to).getDistance();
+
+        return value;
+
+    }
+
+    public boolean prove(){
+        if(vertexes.get(3).getColor()!= white || vertexes.get(50).getColor()!= white){
+            return true;
+        }else{
+            return false;
+        }
+        
     }
 
 }
