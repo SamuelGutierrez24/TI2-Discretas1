@@ -43,6 +43,7 @@ public class Control {
             out= "Is not strongly conex";
         }
         return out;
+        
 
     }
 
