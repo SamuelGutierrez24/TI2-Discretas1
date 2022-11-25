@@ -14,19 +14,19 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Main ppal = new Main();
-        //ppal.prueba();
+        System.out.println("Select the graph to import");
+        ppal.importar();
         int option = -1;
         int graph = 0;
         do {
-            graph = ppal.selecGraph();
             option = ppal.showMenu();
-            ppal.operation(option, graph);
+            ppal.operation(option);
         } while (option != 0);
     }
 
     public int showMenu() {
         System.out.println("Menu: \n" +
-                "(1) Import graph \n" +
+                "(1) Exit \n" +
                 "(2) Show the the order of bosses for pass the game in the less difficulty \n" +
                 "(3) Prove that you can finish the game");
 
@@ -35,29 +35,35 @@ public class Main {
         return option;
     }
 
-    public int selecGraph() {
+    public int selecGraph(){
+    	
+    	
         System.out.println("Select the type of graph implementation for solve the problem: \n " +
                 "(1) Adjacency list \n" +
                 "(2) Adjacency matrix");
+
         int option = sc.nextInt();
         sc.nextLine();
         return option;
     }
 
-    public void operation(int option, int graph) {
+    public void operation(int option) throws Exception {
         switch (option) {
 
             case 1:
-                System.out.println("no se");
+            	System.out.println("Returning to select graph");
                 break;
             case 2:
+            	int graph = selecGraph();           
                 dijks(graph);
                 break;
             case 3:
-            System.out.println("Input the key of the boss you are:");
-            int boss =  sc.nextInt();
-            sc.nextLine();
-            System.out.println(control.proveFinish(graph,boss));
+            	graph = selecGraph();
+            	System.out.println("Input the key of the boss you are:");
+            	int boss =  sc.nextInt();
+            	sc.nextLine();
+            	System.out.println(control.proveFinish(graph,boss,50,51));
+                break;
             default:
                 System.out.println("Invalid input");
 
@@ -82,9 +88,9 @@ public class Main {
             int finall = sc.nextInt();
             sc.nextLine();
             if(finall == 1){
-                finall = 50;
+                finall = 2;
             }else{
-                finall = 51;
+                finall = 3;
             }
             System.out.println(control.bossesF(graph, finall));
             break;
@@ -102,8 +108,11 @@ public class Main {
 
     }
 
-    public void prueba(){
-        System.out.println(control.bosses());
+    public void importar() throws Exception{
+    	
+    	control.loadVertexDataBase();
+    	control.loadEdgeDataBase();
+        
     }
 
 }

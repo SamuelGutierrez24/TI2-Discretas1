@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 public class Graph<T> {
 
     ArrayList<Vertex<T>> vertices;
-    private HashMap<Integer, Vertex<T>>vertexes;
+    protected HashMap<Integer, Vertex<T>>vertexes;
     //ArrayList<ArrayList<Edge>> aristasA;
 
     private int time = 0;
@@ -184,25 +184,37 @@ public class Graph<T> {
     }
 
     public void addArista(int keyFrom, int keyTo, int peso) throws Exception{
+    	
         if(vertexes.get(keyFrom) != null && vertexes.get(keyTo) != null){
 
             Edge arista = new Edge(vertexes.get(keyFrom), vertexes.get(keyTo), peso);
 
-            vertexes.get(keyFrom).aristas.add(arista);
-
+            vertexes.get(keyFrom).addEdge(arista);
+            	
             añadirAdyacentes(keyTo, keyFrom);
+            
+
+            //añadirAdyacentes(keyTo, keyFrom);
         }else {
             throw new VertexNotFoundException("Invalid vertex input");
         }
 
 
     }
+    
+    public void initialize() {
+    	
+    	for(Map.Entry<Integer, Vertex<T>> c : vertexes.entrySet()){
+            
+             c.getValue().initialize();  
+            
+        }
+    	
+    }
 
 
 
     public String dijkstraBase(int source,int to)  {
-
-        int[] dist2 = new int[vertexes.size()];
         
         List<Vertex<T>> temporalVertices = new ArrayList<Vertex<T>>();
 
@@ -243,17 +255,14 @@ public class Graph<T> {
 
                         int alt = u.getDistance()+u.aristas.get(j).getWeight();
 
-                        if(alt < u.aristas.get(j).getTo().getDistance()) {
+                        if(alt < u.aristas.get(j).getTo().getDistance() && alt>0) {
 
                             u.aristas.get(j).getTo().setDistance(alt);
                             u.aristas.get(j).getTo().setPadre(u);
 
                         }
-
                     }
-
                 }
-
                 temporalVertices.sort(new Comparator<Vertex<T>>() {
                     @Override
                     public int compare(Vertex<T> o1, Vertex<T> o2) {
@@ -277,13 +286,16 @@ public class Graph<T> {
                 verte=verte.getPadre();
             }
         }
+        
+        Collections.reverse(solution);
 
         String out = "{ ";
 
         boolean flag2 = true;
 
         for (int i = 0; i<solution.size()&&flag2;i++){
-            if (solution.get(i).getKey() == source){
+        	
+            if (solution.get(i).getKey() == to){
                 out += ""+ solution.get(i).getValue();
                 flag2 = false;
             }
@@ -299,7 +311,7 @@ public class Graph<T> {
             return "You can not visit that boss starting in your actual boss (vertex) ";
         }
 
-        return out + value;
+        return "Way: " + out + " Difficulty :" + value;
 
     }
 
@@ -375,13 +387,31 @@ public class Graph<T> {
 
     }
 
-    public boolean prove(){
-        if(vertexes.get(3).getColor()!= white || vertexes.get(50).getColor()!= white){
+    public boolean prove(int f,int f2){
+        if(vertexes.get(f).getColor()!= white || vertexes.get(f2).getColor()!= white){
             return true;
         }else{
             return false;
         }
         
     }
+
+    public HashMap<Integer,Vertex<T>> getVertexes(){
+        return vertexes;
+    }
+
+    public void deleteArista(int from,int to){
+        vertexes.get(from).deleteArista(from,to);
+    }
+    public boolean proveArista(int from,int to){
+        return vertexes.get(from).proveArista(from,to);
+    }
+    public boolean proveVertex(int v){
+        if(vertexes.get(v)!=null){
+            return true;
+        }
+        return false;
+    }
+
 
 }

@@ -85,7 +85,7 @@ public class GraphM<T> {
     public String dijkstraBase(int v,int to){
         ArrayList<Vertex<T>> solution = new ArrayList<>();
         Vertex<T> source = vertexes.get(v);
-        source.setDistance(v);
+        source.setDistance(0);
 
         ArrayList<Vertex<T>> Q = new ArrayList<>();
         Q.add(source);
@@ -119,7 +119,7 @@ public class GraphM<T> {
                         if(minus>alt){
                             minus = alt;
                         }
-                        if(minus<vertexes.get(i).getDistance()){
+                        if(minus<vertexes.get(i).getDistance() && minus>0){
                             vertexes.get(i).setDistance(minus);
                             vertexes.get(i).setPadre(u);
                             Q.sort(new Comparator<Vertex<T>>() {
@@ -147,28 +147,25 @@ public class GraphM<T> {
                 solution.add(verte.getPadre());
                 verte = verte.getPadre();
             }
-
         }
-
+        Collections.reverse(solution);
         String out = "{ ";
         boolean flag = true;
         for (int i = 0; i<solution.size()&&flag;i++){
-            if (solution.get(i).getKey() == v ){
-                out+= ""+ solution.get(i).getKey();
+            if (solution.get(i).getKey() == to){
+                out+= ""+ solution.get(i).getValue();
                 flag = false;
             }
             else {
-                out+= solution.get(i).getKey() + ", ";
+                out+= solution.get(i).getValue() + ", ";
             }
         }
         out += "}";
-
         int value = vertexes.get(to).getDistance();
         if(value == Integer.MAX_VALUE){
             return "You can not visit that boss starting in your actual boss (vertex) ";
         }
-
-        return out + value;
+        return "Way : " + out + " Difficulty : " + value;
 
     }
 
@@ -264,14 +261,15 @@ public class GraphM<T> {
         return count;
     }
 
-    public boolean prove(){
-        if(vertexes.get(3).getColor()!= white || vertexes.get(50).getColor()!= white){
+    public boolean prove(int f,int f2){
+        if(vertexes.get(f).getColor()!= white || vertexes.get(f2).getColor()!= white){
             return true;
         }else{
             return false;
         }
         
     }
+
 
 
 

@@ -22,9 +22,20 @@ public class Vertex<T>  {
         aristas = new ArrayList<>();
 
     }
+    
+    public void initialize() {
+    	
+    	this.aristas = new ArrayList<>();
+    	this.adyacentes = new ArrayList<>();
+    	
+    }
 
     public void addAdj(Vertex<T> toAdd){
         adyacentes.add(toAdd);
+    }
+    
+    public void addEdge(Edge<T> x){
+        aristas.add(x);
     }
 
     public int getColor() {
@@ -96,11 +107,31 @@ public class Vertex<T>  {
                 adyacentes.remove(vertex);
             }
         }
+
     }
 
 
     public void añadirAdyacente(Vertex<T> hijo) {
         adyacentes.add(hijo);
     }
+
+    public void deleteArista(int from,int to){
+        for (int i=0;i<aristas.size();i++){
+            if(aristas.get(i).getFrom().getKey() == from && aristas.get(i).getFrom().getKey() == to){
+                aristas.remove(i);
+            }
+        }
+    }
+
+    public boolean proveArista(int from,int to) {
+        for (int i = 0; i < aristas.size(); i++) {
+            if (aristas.get(i).getFrom().getKey() == from && aristas.get(i).getTo().getKey() == to) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
 
