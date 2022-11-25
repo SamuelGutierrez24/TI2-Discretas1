@@ -264,7 +264,7 @@ public class Graph<T> {
             }
 
         ArrayList<Vertex<T>> solution = new ArrayList<>();
-        Vertex<T> verte = vertexes.get(3);
+        Vertex<T> verte = vertexes.get(to);
         solution.add(verte);
         boolean flag = true;
 
@@ -283,7 +283,7 @@ public class Graph<T> {
         boolean flag2 = true;
 
         for (int i = 0; i<solution.size()&&flag2;i++){
-            if (solution.get(i).getKey() == to){
+            if (solution.get(i).getKey() == source){
                 out += ""+ solution.get(i).getValue();
                 flag2 = false;
             }
