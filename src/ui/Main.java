@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Main ppal = new Main();
-        ppal.prueba();
+        //ppal.prueba();
         int option = -1;
         int graph = 0;
         do {

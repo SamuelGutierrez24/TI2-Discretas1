@@ -153,7 +153,7 @@ public class GraphM<T> {
         String out = "{ ";
         boolean flag = true;
         for (int i = 0; i<solution.size()&&flag;i++){
-            if (solution.get(i).getKey() == to ){
+            if (solution.get(i).getKey() == v ){
                 out+= ""+ solution.get(i).getKey();
                 flag = false;
             }

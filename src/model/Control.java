@@ -107,7 +107,7 @@ public class Control {
     }
 
     public String bosses(){
-        return grafo.dijkstraBase(0, 3);
+        return grafo.dijkstraBase(0, 2);
     }
 
 }
