@@ -13,6 +13,7 @@ public class TestGrafo extends TestCase {
         control = new Control();
     }
 
+
     public void testAdd() throws Exception {
         setUpStage1();
         Vertex<String> vertex = new Vertex<>("A",0);
@@ -33,6 +34,7 @@ public class TestGrafo extends TestCase {
         assertEquals((verte.getKey()),3);
         assertEquals(control.getGrafo().proveArista(1,3),true);
     }
+
 
     public void testDelete() throws Exception {
         setUpStage1();
