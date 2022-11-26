@@ -1,1 +1,0 @@
-[{"value":"A","key":0},{"value":"B","key":1},{"value":"C","key":2},{"value":"D","key":3}]

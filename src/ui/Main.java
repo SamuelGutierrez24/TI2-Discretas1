@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Main ppal = new Main();
-        System.out.println("Select the graph to import");
+        System.out.println("Select the graph to import(First the graph vertexes txt and then the graph edges txt).");
         ppal.importar();
         int option = -1;
         int graph = 0;
@@ -51,7 +51,8 @@ public class Main {
         switch (option) {
 
             case 1:
-            	System.out.println("Returning to select graph");
+            	
+            	System.exit(0);
                 break;
             case 2:
             	int graph = selecGraph();           
@@ -88,9 +89,9 @@ public class Main {
             int finall = sc.nextInt();
             sc.nextLine();
             if(finall == 1){
-                finall = 2;
+                finall = 50;
             }else{
-                finall = 3;
+                finall = 51;
             }
             System.out.println(control.bossesF(graph, finall));
             break;

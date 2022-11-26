@@ -73,22 +73,22 @@ public class Control {
 
     public String bossesDe(int graph){
         if(graph == 1){
-            int F50 = grafo.dijkstraNumD(0,3);
-            int F51 = grafo.dijkstraNumD(0, 2);
+            int F50 = grafo.dijkstraNumD(0, 50);
+            int F51 = grafo.dijkstraNumD(0, 51);
             if(F50>F51){
-                return grafo.dijkstraBase(0, 2);
+                return grafo.dijkstraBase(0, 51);
 
             }else{
-                return grafo.dijkstraBase(0, 3);
+                return grafo.dijkstraBase(0, 50);
             }
         }else{
-            int F50 = grafoM.dijkstraNumD(0,3);
-            int F51 = grafoM.dijkstraNumD(0, 2);
+            int F50 = grafoM.dijkstraNumD(0, 50);
+            int F51 = grafoM.dijkstraNumD(0, 51);
             if(F50>F51){
-                return grafoM.dijkstraBase(0, 2);
+                return grafoM.dijkstraBase(0, 51);
 
             }else{
-                return grafoM.dijkstraBase(0, 3);
+                return grafoM.dijkstraBase(0, 50);
             }
         }
     
@@ -179,7 +179,7 @@ public class Control {
     	}
     	
     	grafo.initialize();
-    	
+    	/*
     	for(int j = 0; j <= ToJsonReader.readV().size(); j++) {
     		
     		if(grafo.vertexes.get(j) != null) {
@@ -189,7 +189,7 @@ public class Control {
     		}
     		
     	}
-    	
+    	*/
     	
     }
     
@@ -219,7 +219,7 @@ public class Control {
     		
     	} 	
     	
-    	
+    	/*
     	for(int j = 0; j < grafo.vertexes.size(); j++) {
     		
     		if(grafo.vertexes.get(j) != null && grafo.vertexes.get(j).aristas != null) {
@@ -233,7 +233,7 @@ public class Control {
     		}
     		
     	}
-    	
+    	*/
     	
     }
 
