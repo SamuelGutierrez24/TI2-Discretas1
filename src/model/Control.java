@@ -94,6 +94,29 @@ public class Control {
     
     }
 
+    public String bossesDeT(int graph){
+        if(graph == 1){
+            int F50 = grafo.dijkstraNumD(0, 2);
+            int F51 = grafo.dijkstraNumD(0, 3);
+            if(F50>F51){
+                return grafo.dijkstraBase(0, 3);
+
+            }else{
+                return grafo.dijkstraBase(0, 2);
+            }
+        }else{
+            int F50 = grafoM.dijkstraNumD(0, 2);
+            int F51 = grafoM.dijkstraNumD(0, 3);
+            if(F50>F51){
+                return grafoM.dijkstraBase(0, 3);
+
+            }else{
+                return grafoM.dijkstraBase(0, 2);
+            }
+        }
+
+    }
+
     public String bossesF(int graph, int f){
         if(graph==1){
             return grafo.dijkstraBase(0, f);

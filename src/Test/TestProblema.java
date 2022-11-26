@@ -25,11 +25,11 @@ public class TestProblema extends TestCase {
         control.getGrafo().addArista(1,3,2);
 
         //Camino default, desde el inicio 0 hasta uno de los 2 finales asumiendo c y d como los finales
-        assertEquals(control.bossesDe(1), "{ A, C} 3");
+        assertEquals(control.bossesDeT(1), "Way: { A, C} Difficulty :3");
 
-        assertEquals(control.bossesF(1,3),"{ A, C, B, D} 7" );
+        assertEquals(control.bossesF(1,3),"Way: { A, C, B, D} Difficulty :7" );
 
-        assertEquals(control.bossesST(1,2,3), "{ C, B, D} 4");
+        assertEquals(control.bossesST(1,2,3), "Way: { C, B, D} Difficulty :4");
     }
     public void testBossesMatrix() throws Exception {
         setUpStage1();
@@ -45,11 +45,11 @@ public class TestProblema extends TestCase {
         control.getGrafoM().addEdge(1,3,2);
 
         //Camino default, desde el inicio 0 hasta uno de los 2 finales asumiendo c y d como los finales
-        assertEquals(control.bossesDe(2), "{ A, C} 3");
+        assertEquals(control.bossesDeT(2), "Way : { A, C} Difficulty : 3");
 
-        assertEquals(control.bossesF(2,3),"{ A, C, B, D} 7" );
+        assertEquals(control.bossesF(2,3),"Way : { A, C, B, D} Difficulty : 7" );
 
-        assertEquals(control.bossesST(2,2,3), "{ C, B, D} 4");
+        assertEquals(control.bossesST(2,2,3), "Way : { C, B, D} Difficulty : 4");
     }
 
     public void testFinishGameList() throws Exception {
