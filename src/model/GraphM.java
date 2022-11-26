@@ -21,10 +21,10 @@ public class GraphM<T> {
 
     public GraphM() {
         this.vertices = new ArrayList<>();
-        this.matriz = new ArrayList [50][50];
+        this.matriz = new ArrayList [52][52];
         this.vertexes = new HashMap<>();
-        for(int i = 0; i<50;i++){
-            for (int j = 0;j<50;j++){
+        for(int i = 0; i<52;i++){
+            for (int j = 0;j<52;j++){
                 matriz[i][j] = new ArrayList<>();
             }
         }
@@ -63,7 +63,7 @@ public class GraphM<T> {
         while (!queue.isEmpty()){
             vertex = queue.poll();
             int ind = vertex.getKey();
-            for (int i = 0; i<50;i++){
+            for (int i = 0; i<52;i++){
                 if(!matriz[ind] [i].isEmpty()){
                     if (matriz[ind][i].get(0)!=null){
 
@@ -110,7 +110,7 @@ public class GraphM<T> {
 
 
 
-            for (int i = 0; i<50;i++){
+            for (int i = 0; i<52;i++){
                 if(matriz[u.getKey()][i]!=null){
                     int minus = Integer.MAX_VALUE;
                     for (int j = 0; j<matriz[u.getKey()][i].size();j++){
@@ -197,7 +197,7 @@ public class GraphM<T> {
 
 
 
-            for (int i = 0; i<50;i++){
+            for (int i = 0; i<52;i++){
                 if(matriz[u.getKey()][i]!=null){
                     int minus = Integer.MAX_VALUE;
                     for (int j = 0; j<matriz[u.getKey()][i].size();j++){
